@@ -1,18 +1,27 @@
+import asyncio
+from aiogram import Bot, Dispatcher
+from aiogram.types import ReplyKeyboardMarkup, KeyboardButton, WebAppInfo
+from aiogram.filters import Command
+from aiogram.types import Message
+
 import config
-import logging
-from aiogram import Bot, Despatcher, executor, types
 
-logging.basicConfig(level=logging.INFO)
+bot = Bot(token=config.TOKEN)
+dp = Dispatcher()
 
-bot=Bot(token=config.TOKEN)
-dp=Dispatcher(bot)
+@dp.message(Command("start"))
+async def start_command(message: Message):
+    kb = ReplyKeyboardMarkup(
+        keyboard=[
+            [KeyboardButton(text="Открыть приложение", web_app=WebAppInfo(url="https://c7ea20020786.ngrok-free.app"))]
+        ],
+        resize_keyboard=True
+    )
+    await message.answer("Привет! Всё взаимодействие идёт через приложение", reply_markup=kb)
 
-@dp.message_handler(Command=["start"])
-async def start_command(message: types.Message):
-    await message.reply("Hi")
 
+async def main():
+    await dp.start_polling(bot)
 
-
-if __name__=="__main__":
-    executor.start_polling(dp, skip_updates=True)
-
+if __name__ == "__main__":
+   asyncio.run(main())
