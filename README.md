@@ -1,8 +1,7 @@
 for it to work it`s required three steps 
 
 
-
-1 start forwarding all incoming trafic from telegram or web users wia ngrok (cd to directory, source .venv/bin/activate, ngrok 8000)
+1 install ngrok start forwarding all incoming trafic from telegram or web users wia ngrok (cd to directory, source .venv/bin/activate, ngrok 8000)
 it is important to keep track of your active port, so that all API can communicate with each other
 
 2 initialise webapp server(cd to directory, source .venv/bin/activate, uvicorn webapp:app --reload)
